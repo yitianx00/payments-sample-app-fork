@@ -4,10 +4,7 @@
       <v-col cols="12" md="4">
         <v-form>
           <header>Optional filter params:</header>
-          <v-text-field
-            v-model="formData.accountId"
-            label="Account Id"
-          />
+          <v-text-field v-model="formData.accountId" label="Account Id" />
           <ChainSelect v-model="formData.chain" label="Chain" />
           <v-text-field v-model="formData.currency" label="Currency" />
           <v-btn

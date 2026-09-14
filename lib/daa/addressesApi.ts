@@ -40,7 +40,11 @@ function createDepositAddress(payload: CreateDepositAddressPayload) {
 /**
  * Get deposit addresses
  */
-function getDepositAddresses(accountId: string, chain: string, currency: string) {
+function getDepositAddresses(
+  accountId: string,
+  chain: string,
+  currency: string,
+) {
   const params = {
     accountId: nullIfEmpty(accountId),
     chain: nullIfEmpty(chain),
