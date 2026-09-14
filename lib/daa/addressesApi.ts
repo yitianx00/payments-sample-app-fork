@@ -5,7 +5,7 @@ export interface CreateDepositAddressPayload {
   idempotencyKey: string
   currency: string
   chain: string
-  clientEntityId?: string
+  accountId?: string
 }
 
 export interface CreateRecipientAddressPayload {
@@ -31,8 +31,8 @@ function getInstance() {
  * Create deposit address
  */
 function createDepositAddress(payload: CreateDepositAddressPayload) {
-  if (!payload.clientEntityId) {
-    delete payload.clientEntityId
+  if (!payload.accountId) {
+    delete payload.accountId
   }
   return daaInstance.post(DEPOSIT_PATH, payload)
 }
@@ -41,12 +41,12 @@ function createDepositAddress(payload: CreateDepositAddressPayload) {
  * Get deposit addresses
  */
 function getDepositAddresses(
-  clientEntityId: string,
+  accountId: string,
   chain: string,
   currency: string,
 ) {
   const params = {
-    clientEntityId: nullIfEmpty(clientEntityId),
+    accountId: nullIfEmpty(accountId),
     chain: nullIfEmpty(chain),
     currency: nullIfEmpty(currency),
   }
