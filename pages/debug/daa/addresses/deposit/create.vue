@@ -4,8 +4,8 @@
       <v-col cols="12" md="4">
         <v-form>
           <v-text-field
-            v-model="formData.clientEntityId"
-            label="Client Entity Id (optional)"
+            v-model="formData.accountId"
+            label="Account Id (optional)"
           />
 
           <v-select
@@ -51,12 +51,12 @@ const store = useMainStore()
 const { $daaAddressesApi } = useNuxtApp()
 
 const formData = reactive({
-  clientEntityId: '',
+  accountId: '',
   currency: '',
   chain: '',
 })
 
-const currencyTypes = ['USD']
+const currencyTypes = ['USD', 'EUR']
 const error = ref<any>({})
 const loading = ref(false)
 const showError = ref(false)
@@ -72,12 +72,12 @@ const onErrorSheetClosed = () => {
 
 const makeApiCall = async () => {
   loading.value = true
-  const { clientEntityId, currency, chain } = formData
+  const { accountId, currency, chain } = formData
   const payloadData: CreateDepositAddressPayload = {
     idempotencyKey: uuidv4(),
     currency,
     chain,
-    clientEntityId,
+    accountId,
   }
   try {
     await $daaAddressesApi.createDepositAddress(payloadData)

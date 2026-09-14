@@ -5,8 +5,8 @@
         <v-form>
           <header>Optional filter params:</header>
           <v-text-field
-            v-model="formData.clientEntityId"
-            label="Client Entity Id"
+            v-model="formData.accountId"
+            label="Account Id"
           />
           <ChainSelect v-model="formData.chain" label="Chain" />
           <v-text-field v-model="formData.currency" label="Currency" />
@@ -42,7 +42,7 @@ const store = useMainStore()
 const { $daaAddressesApi } = useNuxtApp()
 
 const formData = reactive({
-  clientEntityId: '',
+  accountId: '',
   chain: '',
   currency: '',
 })
@@ -64,7 +64,7 @@ const makeApiCall = async () => {
   loading.value = true
   try {
     await $daaAddressesApi.getDepositAddresses(
-      formData.clientEntityId,
+      formData.accountId,
       formData.chain,
       formData.currency,
     )
