@@ -6,6 +6,12 @@
           <v-text-field v-model="formData.amount" label="Amount" />
 
           <v-select
+            v-model="formData.currency"
+            :items="currencyTypes"
+            label="Currency"
+          />
+
+          <v-select
             v-model="formData.destinationType"
             :items="destinationTypes"
             label="Destination Type"
@@ -61,12 +67,14 @@ const { $daaTransfersApi } = useNuxtApp()
 
 const formData = reactive({
   amount: '',
+  currency: 'USD',
   destinationType: 'verified_blockchain',
   destinationId: '',
   sourceId: '',
 })
 
 const destinationTypes = ['verified_blockchain', 'account']
+const currencyTypes = ['USD', 'EUR']
 const error = ref<any>({})
 const loading = ref(false)
 const showError = ref(false)
@@ -85,7 +93,7 @@ const makeApiCall = async () => {
 
   const amountDetail = {
     amount: formData.amount,
-    currency: 'USD',
+    currency: formData.currency,
   }
   const destinationDetail =
     formData.destinationType === 'account'
