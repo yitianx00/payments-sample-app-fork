@@ -5,6 +5,12 @@
         <v-form>
           <v-text-field v-model="formData.amount" label="Amount" />
 
+          <v-select
+            v-model="formData.currency"
+            :items="currencyTypes"
+            label="Currency"
+          />
+
           <v-text-field v-model="formData.addressId" label="Address ID" />
 
           <v-btn
@@ -45,9 +51,11 @@ const isFiatAccount = true
 const formData = reactive({
   idempotencyKey: '',
   amount: '',
+  currency: 'USD',
   addressId: '',
 })
 
+const currencyTypes = ['USD', 'EUR']
 const required = [(v: string) => !!v || 'Field is required']
 const error = ref<any>({})
 const loading = ref(false)
@@ -67,7 +75,7 @@ const makeApiCall = async () => {
 
   const amountDetail = {
     amount: formData.amount,
-    currency: 'USD',
+    currency: formData.currency,
   }
   const destinationDetail = {
     type: 'verified_blockchain',
